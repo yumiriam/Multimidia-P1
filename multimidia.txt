@@ -1,0 +1,215 @@
+Aula 03/10
+
+Containers
+        avi (audio, vídeo [em vários formatos] e legenda no mesmo pacote)
+        mkv
+Sinal quadridimensional
+        depende do contexto ¬¬
+ 
+Objetivos da Disciplina:
+        Apresentar ao aluno metodologias associadas à síntese, representação, armazenamento, processamento e transmissão de dados multimídia.
+Ementa:
+        - propriedades físicas do som e imagens e representação digital
+        - síntese, armazenamento, manipulação e processamento de som, imagem e vídeo;
+        - padrões de armazenamento, compressão e transmissão de dados multimídia;
+        - noções de realidade virtual.
+Pré-requisitos:
+        - PI e CG
+Bibliografia:
+        1. Paula Filho, W. P. Multimídia: conceitos e aplicações;
+        2. Chapman, N. e Chapman, J. Digital Multimedia; 2004;
+        3. Gonzalez, R. e Woods, R. Processamento de Imagens Digitais; 2000;
+        4. Bovik, A. Handbook of Image and Video Processing; 2000;
+        5. Alexandre Cardoso, Claudio Kirner, Edgard lamounier Jr, Judith Kelner Tecnologias para o Desenvolvimento de Sistemas de Realidade Virtual e Aumentada; 2007;
+        6. Claudio Kirner, Robson Siscoutto Realidade Virtual e Aumentada: Conceitos, Projeto e Aplicações; 2007;
+        [http://comissoes.sbc.org.br/ce-rv/home/index.php?option=com_content&view=article&id=52&Itemid=57]
+        8. Pereira, V. A. Multimídia Computacional - Produção, Planejamento & Distribuição; 2001;
+Avaliações:
+        - 2 provas
+        - exercícios, seminários e projetos
+        - média das provas 50%
+        - média dos exercícios 25%
+        - média dos seminários/projetos 25%
+Datas:
+        P1 - 26/11
+        P2 - 28/01
+Ferramentas:
+        - linguagem C - compilador GCC
+        - gnuplot  - disponível em http://www.gnuplot.info/
+        - scilab - http://www.scilab.org/products/scilab/download
+        
+Aula 17/10
+
+Pergunta: Existe sinal discreto sem aliasing.
+Resposta: Todo sinal digital tem aliasing, não existe sinal que não tenha.
+http://en.wikipedia.org/wiki/Aliasing newline
+http://pt.wikipedia.org/wiki/Teorema_da_amostragem
+
+Aula 22/10
+
+PCM Pulse Code Modulator
+
+Modulador de Pulsos
+
+É um método de se converter um sinal analógico em digital. Funciona capturando-se o valor do sinal analógico de tempos em tempos e convertendo o valor em um número digital.
+O valor lido pode ser armazenado em uma variável que pode ser de 8, 10, 20, 24bits.
+Exemplo: CDs usam um sinal PCM de 44100Hz e 16bits.
+	DVDs 6 canais +/- 3 vezes mais espaço
+	geralmente áudio compactado pelo AC3 (Dolby Digital, nome comercial)
+	baseado em perda de dados
+	
+Aula 24/10
+
+Parâmetros Físicos e Perceptuais do Som
+
+Durante a descrição matemática do sinal de áudio, mencionamos alguns parâmetros como a frequência fundamental e frequência angular, a altura média do sinal amplitude e o ângulo de fase.
+Passaremos agora a discutir alguns parâmetros perceptuais do som, que representam as propriedades sonoras, tal qual podem ser percebidas pelo sentido da audição.
+
+	# mp3 algoritmo que compacta o som descartando informações
+	# 	deve saber qual informação pode descartar
+
+Duas delas são as mais importantes: a intensidade e a altura. Elas correspondem à grandezas físicas embora não sejam percebidas de forma direta ou proporcional.
+Intensidade: Qualidade que distingue sons fortes (de grande volume) de sons fracos (de baixo volume).
+Altura: Qualidade que distingue sons graves de agudos.
+A intensidade representa a percepção da amplitude da vibração sonora (percepção da potência acústica entregue pelo sinal, que corresponde a energia por unidade de tempo medida em "watts"). Portanto a amplitude determina a potência do sinal (em outras palavras, a potência é proporcional ao quadrado da amplitude).
+A questão chave é que a amplitude ou potência são conceitos físicos e intensidade um conceito de natureza psicofísica [# subjetivo]. 
+A intensidade corresponde a como o nosso órgão sensorial responde ao estímulo de potência. Nesse sentido, a percepção do ouvido é não linear em relação a potência, e sim logaritmica.
+Grosso modo, para produzir um som de intensidade duas vezes maior é preciso utilizar cerca de 10x mais potência acústica. Matemáticamente, podemos escrever:
+	I = 10 log_10 (P / P_0) [dB] ou I = 10 log_10 (A^2 / A_0^2)
+	# colar no wolframalpha.com
+onde P_0 é uma potência de referência, que pode ser a princípio referente à menor intensidade audível (em média).
+A altura de um som está relacionada com a frequência da onda que o representa. Sons de menor altura são mais graves, que correspondem a comprimentos de onda maiores. Sons mais agudos, correspondem a maoiores frequências, ou comprimento de onda menores.
+Obs.: Não devemos confundir tecnicamente altura com volume.
+No caso de sons complexos, compostos de inúmeras formas de onda com frequências diferentes, a altura do som será a frequência fundamental (f_0 ou w_0) que corresponde à senoide de mais baixa frequência.
+A capacidade de percepção do ouvido humano está em torno de 15/16 Hz até 15000/20000 Hz, podendo variar consideravelmente de pessoa pra pessoa.
+
+Aula 05/11
+
+Recapitulando
+	Transformada de Fourier
+	Convolução
+	Arquivo Wave
+# Wave canônico (1 NumChannel, 8 BitsPerSample), base pra enxergar o áudio cru
+# Transformada é reversível, não joga nada fora
+
+Codecs
+	Codificador/Decodificador
+	Algoritmo que codifica e decodifica algum dado.
+Container
+	"Casca" onde se coloca áudio, vídeo e imagem, que podem ser de qualquer formato.
+	Container não é formato.
+Formato 
+	Padrão (http://en.wikipedia.org/wiki/File_format)
+
+Algoritmos de Compressão sem Perda
+	# Baseados em redundância
+	Razão de compressão: B_1 (após) / B_0 (antes)
+	BitsPerSample: Quantização
+	# f(x): quantização, x: amostragem
+	
+Técnicas de dados multimídia para compressão exploram:
+	A. Redundância de dados
+	B. As propriedades da percepção humana
+	
+Dependendo da combinação das técnicas podemos ter compressão:
+	- Com perda
+	- Sem perda
+	
+A bagagem por trás da redundância está no critério de entropia.
+
+	Técnica preditiva - modelo entrópico.
+
+	PCM - amostras "não mascaradas"
+	DPCM - Differential Pulse Code Modulator
+	
+Aula 07/11
+
+# MP3 mistura das características de redundância e da percepção humana
+bitstream
+
+Pesquisa PCM Diferencial e Adaptativo - Complexidade do Algoritmo
+	10 páginas
+
+Aula 12/11
+
+Dia 26/11 definição dos grupos (3 pessoas)
+
+O que é byterate?
+	Taxa de transmissão bytes por segundo.
+O que é bitrate?
+	Taxa de transmissão bits por segundo.
+O que é bitstream?
+
+Padronização
+
+µ-law (Estados Unidos/Japão)
+	y = log(1+µx) / log(1+µ), 
+	x ≥ 0
+	µ = 255
+	
+A-law ("Resto" do mundo)
+	y = Ax / (1 + log(A)), p/ 0 ≤ |x| < 1 / A
+	y = (1 + log(Ax)) / (1 + log(A)), p/ 1/A ≤ |x| < 1
+	
+	companding -> compressing / expanding
+	
+FLAC (Free Lossless Audio Codec)
+	Compressão sem perda baseada em predição (entropia).
+	O formato faz uma convolução utilizando uma máscara [-1 1], pra tornar o formato ainda mais redundante.
+	Por que é sem perda?
+		Processo convolucional é reversível?
+			Garantir que o determinante da matriz é 0 e que ela seja quadrada (matriz inversa).
+	
+	Transformada de Fourier: mapa de frequências.
+	Plotar frequências, somas de senos (octave).
+	
+Aula 21/11
+
+	O sinal da Transformada de Fourier é redundante e periódico.
+	Por isso é possível existir algoritmos eficientes para o cálculo dela (fft).
+	
+	f[t]
+	F[w] = 1/N sum
+	
+	w = 0 (frequência do sinal)
+		F[w] = 1/N sum f[m], m = 0 to (n-1)
+		
+Aula 28/11
+
+	X[u, v] = (4*C(u)*C(v) / M^2)*...
+		sum(sum(x(i,j)*cos[(2*i + 1)*u*pi / (2*m)]*cos[(2*j + 1)*v*pi / (2*m)]) from j = 0 to m) from i = 0 to m
+	
+	C(u), C(v) = 1 / sqrt(2) p/ u, v = 0
+				 1 p/ u, v = 1, ..., (m - 1)
+				 0 outra forma
+	
+	M = 8
+	512 = 512 pixels = 64 blocos
+	
+	Padrão JPEG.
+		Blocos em potências de 2 (8x8).
+		DCT concentra a informação na origem de cada bloco (parte sup. esq.).
+		Compressão SEM PERDA.
+		
+	O que ele quer:
+		Função em C.
+		Ler uma imagem TIFF, usando a biblioteca libtiff.
+
+Aula 03/11
+
+	Relação sinal x ruído.
+	
+	Lista:
+		mpg123 - programa open source, usado em interfaces de programas de som
+			http://www.mpg123.org/
+	
+		(17) Ruídos associados à altas frequências.
+			Tranformada de Fourier no sinal (acontece um deslocamento para os extremos da baixa frequência);
+			Eliminar ruído: determinar janela no espectro de Fourier para zerar as informações de alta frequência 
+		(centro do gráfico), e depois aplicar a inversa. (Ajustar os valores de frequências)
+			http://wiki.audacityteam.org/wiki/How_Noise_Removal_Works
+			http://www.relisoft.com/science/physics/sound.html
+			
+		(31) Implementação do RLE.
+			
+	http://jeremykun.wordpress.com/2012/07/18/the-fast-fourier-transform/
